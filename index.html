@@ -29,66 +29,263 @@
             color: var(--text-dark);
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
+            margin: 0;
+            padding: 0;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 300px;
+            height: 100vh;
+            background: var(--gradient-2);
+            color: var(--text-light);
+            padding: 30px 20px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 5px 0 20px rgba(0,0,0,0.2);
+        }
+
+        .main-content {
+            margin-left: 300px;
+            min-height: 100vh;
             padding: 20px;
         }
 
-        header {
-            background: var(--gradient-2);
-            color: var(--text-light);
-            padding: 60px 0;
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar-profile {
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            opacity: 0.3;
-        }
-
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .profile-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 40px;
             margin-bottom: 30px;
-            flex-wrap: wrap;
         }
 
-        .profile-icon {
-            width: 150px;
-            height: 150px;
+        .sidebar-icon {
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 4px solid rgba(255,255,255,0.2);
+            margin: 0 auto 20px;
             overflow: hidden;
-            background: white;
+            border: 3px solid rgba(255,255,255,0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        .profile-icon img {
+        .sidebar-icon img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .sidebar h1 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        .sidebar-title {
+            font-size: 0.9em;
+            color: #64b5f6;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .sidebar-contact {
+            margin-top: 20px;
+        }
+
+        .sidebar-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-contact-item:hover {
+            color: #64b5f6;
+            transform: translateX(5px);
+        }
+
+        .sidebar-nav {
+            margin-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 20px;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 10px 15px;
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(5px);
+        }
+
+        .nav-item.active {
+            background: var(--highlight-color);
+        }
+
+        .security-chat {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            height: 600px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: var(--gradient-2);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--highlight-color);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .message.user .message-avatar {
+            background: var(--highlight-color);
+        }
+
+        .message-content {
+            max-width: 70%;
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .message.user .message-content {
+            background: var(--gradient-1);
+            color: white;
+        }
+
+        .message-time {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .chat-input {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chat-input-field {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 1em;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .chat-input-field:focus {
+            border-color: var(--highlight-color);
+        }
+
+        .chat-send-btn {
+            background: var(--highlight-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .chat-send-btn:hover {
+            background: #d63850;
+            transform: translateY(-2px);
+        }
+
+        .chat-quick-actions {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .quick-action-btn {
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .quick-action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .profile-info h1 {
@@ -310,6 +507,122 @@
             font-size: 0.9em;
         }
 
+        .tools-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .password-generator {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .password-display {
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2em;
+            margin: 15px 0;
+            word-break: break-all;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .password-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .option-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn {
+            background: var(--highlight-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+
+        .btn:hover {
+            background: #d63850;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .blog-section {
+            background: white;
+            margin: 30px 0;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .blog-post {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--highlight-color);
+            transition: all 0.3s ease;
+        }
+
+        .blog-post:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .blog-title {
+            font-size: 1.4em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .blog-content {
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .blog-tags {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--gradient-1);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+        }
+
         footer {
             background: var(--gradient-2);
             color: var(--text-light);
@@ -369,38 +682,46 @@
         <i class="fas fa-shield-alt"></i> Secured Profile
     </div>
 
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="profile-section">
-                    <div class="profile-icon">
-                        <img src="img.png" alt="Marcos Soares da Silva">
-                    </div>
-                    <div class="profile-info">
-                        <h1>Marcos Soares da Silva</h1>
-                        <div class="title">IAM Cyber Security Engineer | Identity & Access Management | Full Stack</div>
-                        <div class="contact-info">
-                            <a href="mailto:marcos.assitech@gmail.com" class="contact-item">
-                                <i class="fas fa-envelope"></i>
-                                <span>marcos.assitech@gmail.com</span>
-                            </a>
-                            <a href="https://linkedin.com/in/marcosjobssilva" target="_blank" class="contact-item">
-                                <i class="fab fa-linkedin"></i>
-                                <span>linkedin.com/in/marcosjobssilva</span>
-                            </a>
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Barueri, São Paulo – Brasil</span>
-                            </div>
-                        </div>
-                    </div>
+    <aside class="sidebar">
+        <div class="sidebar-profile">
+            <div class="sidebar-icon">
+                <img src="img.png" alt="Marcos Soares da Silva">
+            </div>
+            <h1>Marcos Soares da Silva</h1>
+            <div class="sidebar-title">IAM Cyber Security Engineer<br>Identity & Access Management<br>Full Stack</div>
+            
+            <div class="sidebar-contact">
+                <a href="mailto:marcos.assitech@gmail.com" class="sidebar-contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>marcos.assitech@gmail.com</span>
+                </a>
+                <a href="https://linkedin.com/in/marcosjobssilva" target="_blank" class="sidebar-contact-item">
+                    <i class="fab fa-linkedin"></i>
+                    <span>linkedin.com/in/marcosjobssilva</span>
+                </a>
+                <div class="sidebar-contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Barueri, São Paulo</span>
                 </div>
             </div>
         </div>
-    </header>
 
-    <div class="container">
-        <section class="section">
+        <nav class="sidebar-nav">
+            <a href="#idiomas" class="nav-item">🌐 Idiomas</a>
+            <a href="#resumo" class="nav-item">👤 Resumo</a>
+            <a href="#competencias" class="nav-item">⚙️ Competências</a>
+            <a href="#experiencia" class="nav-item">💼 Experiência</a>
+            <a href="#cases" class="nav-item">🚀 Cases & Projetos</a>
+            <a href="#formacao" class="nav-item">🎓 Formação</a>
+            <a href="#certificacoes" class="nav-item">🏆 Certificações</a>
+            <a href="#chat" class="nav-item">💬 Chat de Segurança</a>
+            <a href="#blog" class="nav-item">📝 Blog</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="container">
+        <section class="section" id="idiomas">
             <h2 class="section-title">
                 <i class="fas fa-language"></i>
                 Idiomas
@@ -424,7 +745,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="resumo">
             <h2 class="section-title">
                 <i class="fas fa-user-circle"></i>
                 Resumo Profissional
@@ -433,7 +754,7 @@
             <p>Experiência prática em projetos de grande escala, apoiando decisões estratégicas por meio de dados, dashboards e integrações seguras. Perfil colaborativo, orientado a resultados e boas práticas de segurança, com histórico consistente de atuação em empresas de alta complexidade tecnológica.</p>
         </section>
 
-        <section class="section">
+        <section class="section" id="competencias">
             <h2 class="section-title">
                 <i class="fas fa-cogs"></i>
                 Competências Técnicas
@@ -478,6 +799,19 @@
                         <li>Linux</li>
                         <li>Windows Server</li>
                         <li>Active Directory</li>
+                        <li>Slack Admin</li>
+                        <li>Jira Atlassian</li>
+                        <li>Jamf</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4><i class="fas fa-laptop"></i> Enterprise Tools</h4>
+                    <ul class="skill-list">
+                        <li>Workspace ONE (Dell)</li>
+                        <li>Dell Support Assist</li>
+                        <li>Okta Identity Cloud</li>
+                        <li>Service Desk Integration</li>
+                        <li>Custom Ticket Systems</li>
                     </ul>
                 </div>
                 <div class="skill-category">
@@ -501,7 +835,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="experiencia">
             <h2 class="section-title">
                 <i class="fas fa-briefcase"></i>
                 Experiência Profissional
@@ -578,7 +912,104 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="cases">
+            <h2 class="section-title">
+                <i class="fas fa-rocket"></i>
+                Cases & Projetos Destaque
+            </h2>
+            
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="company-name">🏢 Mercado Livre - Implementação Okta</div>
+                        <div class="position">IAM & SSO Implementation</div>
+                        <div class="period">2020 - 2022</div>
+                    </div>
+                </div>
+                <ul class="responsibilities">
+                    <li>Liderança técnica na implementação do Okta Identity Cloud para 50.000+ colaboradores</li>
+                    <li>Desenvolvimento de integrações customizadas entre Okta e sistemas legados</li>
+                    <li> Migração de sistemas de autenticação para Single Sign-On (SSO)</li>
+                    <li>Implementação de MFA para aplicações críticas de negócio</li>
+                    <li>Criação de políticas de acesso baseadas em Zero Trust Architecture</li>
+                    <li>Redução de 80% em tickets de reset de senha através de self-service</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="company-name">🎫 Sistema de Ticketing Customizado</div>
+                        <div class="position">Desenvolvimento & Integração</div>
+                        <div class="period">2021 - 2022</div>
+                    </div>
+                </div>
+                <ul class="responsibilities">
+                    <li>Desenvolvimento completo de sistema de ticketing próprio substituindo Service Desk</li>
+                    <li>Integração nativa com Jira Atlassian para sincronização de projetos</li>
+                    <li>Automação de workflows de aprovação e escalonamento</li>
+                    <li>Implementação de dashboard em tempo real com métricas de SLA</li>
+                    <li>Redução de 60% no tempo de resolução de incidentes</li>
+                    <li>Treinamento de equipe de suporte na nova plataforma</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="company-name">💻 Workspace ONE & Dell Support Assist</div>
+                        <div class="position">Enterprise Mobility & Device Management</div>
+                        <div class="period">2019 - 2021</div>
+                    </div>
+                </div>
+                <ul class="responsibilities">
+                    <li>Implementação do Dell Workspace ONE para gestão de 10.000+ dispositivos</li>
+                    <li>Desenvolvimento de método automatizado de preparação de máquinas usando Dell Support Assist</li>
+                    <li>Criação de imagens customizadas para diferentes perfis de usuários</li>
+                    <li>Integração com Active Directory para gestão centralizada de identidades</li>
+                    <li>Implementação de políticas de segurança e compliance corporativo</li>
+                    <li>Redução de 70% no tempo de provisionamento de novos dispositivos</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="company-name">🔧 Jamf & Enterprise Integration</div>
+                        <div class="position">Apple Device Management</div>
+                        <div class="period">2020 - 2023</div>
+                    </div>
+                </div>
+                <ul class="responsibilities">
+                    <li>Administração do Jamf Pro para gestão de ecossistema Apple</li>
+                    <li>Integração com Okta para autenticação unificada em dispositivos macOS/iOS</li>
+                    <li>Desenvolvimento de scripts para automação de configuração e segurança</li>
+                    <li>Implementação de FileVault e políticas de criptografia corporativa</li>
+                    <li>Criação de self-service portal para instalação de aplicativos aprovados</li>
+                    <li>Conformidade com regulamentações de segurança e privacidade</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="experience-header">
+                    <div>
+                        <div class="company-name">📊 Slack & Jira Admin</div>
+                        <div class="position">Collaboration & Project Management</div>
+                        <div class="period">2019 - 2023</div>
+                    </div>
+                </div>
+                <ul class="responsibilities">
+                    <li>Administração completa do Slack Enterprise com 20.000+ usuários</li>
+                    <li>Configuração de workspaces, canais e políticas de segurança</li>
+                    <li>Integração de bots customizados para automação de tarefas</li>
+                    <li>Gestão do Jira Atlassian para múltiplos projetos e squads</li>
+                    <li>Criação de workflows customizados e dashboards de produtividade</li>
+                    <li>Implementação de integrações entre Slack e Jira para notificações</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="section" id="formacao">
             <h2 class="section-title">
                 <i class="fas fa-graduation-cap"></i>
                 Formação Acadêmica
@@ -625,7 +1056,7 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="certificacoes">
             <h2 class="section-title">
                 <i class="fas fa-certificate"></i>
                 Certificações
@@ -653,6 +1084,136 @@
                 </div>
             </div>
         </section>
+
+        <section class="section" id="chat">
+            <h2 class="section-title">
+                <i class="fas fa-comments"></i>
+                Chat de Segurança da Informação
+            </h2>
+            
+            <div class="security-chat">
+                <div class="chat-header">
+                    <h3><i class="fas fa-shield-alt"></i> MarquinhosBot IA</h3>
+                    <p>Seu especialista virtual em segurança cibernética</p>
+                </div>
+                
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message">
+                        <div class="message-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="message-content">
+                            <p>👋 Olá! Sou o MarquinhosBot IA, seu assistente de segurança da informação. Como especialista em IAM e cibersegurança com mais de 6 anos de experiência, posso ajudar com:</p>
+                            <ul>
+                                <li>Dicas de segurança digital</li>
+                                <li>Boas práticas de IAM</li>
+                                <li>Recomendações de proteção</li>
+                                <li>Análise de vulnerabilidades</li>
+                            </ul>
+                            <div class="message-time">10:30</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chat-input">
+                    <div class="chat-quick-actions">
+                        <button class="quick-action-btn" onclick="sendQuickMessage('Dicas de senha segura')">
+                            🔐 Dicas de senha
+                        </button>
+                        <button class="quick-action-btn" onclick="sendQuickMessage('Gerador de senha')">
+                            🔑 Gerar senha
+                        </button>
+                        <button class="quick-action-btn" onclick="sendQuickMessage('Proteger conta')">
+                            🛡️ Proteger conta
+                        </button>
+                        <button class="quick-action-btn" onclick="sendQuickMessage('MFA recomendations')">
+                            🔑 Recomendações MFA
+                        </button>
+                        <button class="quick-action-btn" onclick="sendQuickMessage('Security best practices')">
+                            📋 Best practices
+                        </button>
+                    </div>
+                    <div class="chat-input-container">
+                        <input type="text" class="chat-input-field" id="chatInput" placeholder="Digite sua pergunta de segurança..." onkeypress="handleChatKeyPress(event)">
+                        <button class="chat-send-btn" onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i> Enviar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="blog-section" id="blog">
+            <h2 class="section-title">
+                <i class="fas fa-blog"></i>
+                Dicas do Marquinhos
+            </h2>
+            
+            <div class="blog-post">
+                <div class="blog-meta">
+                    <span><i class="fas fa-calendar"></i> 15 de Janeiro de 2026</span>
+                    <span><i class="fas fa-user"></i> Marcos Soares da Silva</span>
+                </div>
+                <h3 class="blog-title">🔒 Os 5 Pilares da Segurança de Identidade na Nuvem</h3>
+                <div class="blog-content">
+                    <p>Na era da transformação digital, a segurança de identidade tornou-se o ponto central da estratégia de cibersegurança. Como especialista em IAM com mais de 6 anos de experiência, compartilho os cinco pilares fundamentais que toda organização deve implementar:</p>
+                    <p><strong>1. Autenticação Multifator (MFA)</strong> - A primeira linha de defesa nunca deve ser apenas uma senha. O MFA adiciona camadas cruciais de segurança.</p>
+                    <p><strong>2. Princípio do Menor Privilégio</strong> - Conceda apenas o acesso necessário para executar tarefas específicas. Isso limita o impacto de possíveis brechas.</p>
+                    <p><strong>3. Monitoramento Contínuo</strong> - Implemente logs e alertas em tempo real para detectar atividades suspeitas.</p>
+                    <p><strong>4. Gestão do Ciclo de Vida da Identidade</strong> - Desde a criação até a exclusão de contas, cada etapa deve ser gerenciada formalmente.</p>
+                    <p><strong>5. Educação e Conscientização</strong> - O fator humano continua sendo o elo mais fraco. Invista em treinamento contínuo.</p>
+                </div>
+                <div class="blog-tags">
+                    <span class="tag">IAM</span>
+                    <span class="tag">Cloud Security</span>
+                    <span class="tag">MFA</span>
+                    <span class="tag">Best Practices</span>
+                </div>
+            </div>
+
+            <div class="blog-post">
+                <div class="blog-meta">
+                    <span><i class="fas fa-calendar"></i> 10 de Janeiro de 2026</span>
+                    <span><i class="fas fa-user"></i> Marcos Soares da Silva</span>
+                </div>
+                <h3 class="blog-title">🛡️ Blue Team: Estratégias de Defesa Proativa</h3>
+                <div class="blog-content">
+                    <p>Trabalhar como Blue Team é como ser um guardião digital constante. Minha experiência no Mercado Livre me ensinou que a defesa eficaz vai além de simplesmente reagir a ameaças:</p>
+                    <p><strong>Deteção Antecipada:</strong> Implementamos sistemas de IDS/IPS que utilizam machine learning para identificar padrões anômalos antes que se tornem incidentes.</p>
+                    <p><strong>Resposta Rápida:</strong> Playbooks automatizados reduzem o tempo de resposta de horas para minutos, minimizando o impacto de incidentes.</p>
+                    <p><strong>Inteligência de Ameaças:</strong> Integramos feeds de threat intelligence para antecipar vetores de ataque específicos do nosso setor.</p>
+                    <p><strong>Simulações Constantes:</strong> Red Team exercises regulares mantêm nossa equipe afiada e nossos controles eficazes.</p>
+                </div>
+                <div class="blog-tags">
+                    <span class="tag">Blue Team</span>
+                    <span class="tag">Threat Detection</span>
+                    <span class="tag">Incident Response</span>
+                    <span class="tag">Cyber Defense</span>
+                </div>
+            </div>
+
+            <div class="blog-post">
+                <div class="blog-meta">
+                    <span><i class="fas fa-calendar"></i> 5 de Janeiro de 2026</span>
+                    <span><i class="fas fa-user"></i> Marcos Soares da Silva</span>
+                </div>
+                <h3 class="blog-title">🔐 Automação de Segurança: O Futuro é Agora</h3>
+                <div class="blog-content">
+                    <p>A automação transformou completamente a forma como abordamos a segurança cibernética. Em meu dia a dia, utilizo Python e Node.js para criar soluções que antes exigiam horas de trabalho manual:</p>
+                    <p><strong>Scripts de Verificação de Compliance:</strong> Automatizamos auditorias de segurança que verificam milhares de endpoints em minutos.</p>
+                    <p><strong>Integrações via API:</strong> Conectamos Okta com diversas ferramentas para sincronizar identidades e aplicar políticas de forma automática.</p>
+                    <p><strong>Análise de Logs com BigQuery:</strong> Processamos terabytes de dados de segurança para identificar tendências e anomalias.</p>
+                    <p><strong>Dashboards em Looker:</strong> Visualizamos métricas de segurança em tempo real para tomada de decisões estratégicas.</p>
+                    <p>A automação não substitui o especialista; ela nos permite focar no que realmente importa: análise estratégica e resposta a incidentes complexos.</p>
+                </div>
+                <div class="blog-tags">
+                    <span class="tag">Automação</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">BigQuery</span>
+                    <span class="tag">DevSecOps</span>
+                </div>
+            </div>
+        </section>
     </div>
 
     <footer>
@@ -661,5 +1222,137 @@
             <p><i class="fas fa-shield-alt"></i> Perfil profissional protegido com as melhores práticas de segurança</p>
         </div>
     </footer>
+    </main>
+
+    <script>
+        // Chat de Segurança
+        const securityResponses = {
+            'Dicas de senha segura': '🔐 **Dicas de Senhas Seguras:**\n\n1. Use senhas com pelo menos 12 caracteres\n2. Combine letras maiúsculas, minúsculas, números e símbolos\n3. Evite informações pessoais (datas, nomes)\n4. Use senhas diferentes para cada conta\n5. Considere usar um gerenciador de senhas\n6. Ative a autenticação de dois fatores sempre que possível\n\nLembre-se: Uma senha forte é sua primeira linha de defesa!',
+            
+            'Proteger conta': '🛡️ **Proteção de Contas:**\n\n**Essencial:**\n• Autenticação Multifator (MFA)\n• Senhas únicas e complexas\n• Revisão periódica de acessos\n\n**Avançado:**\n• Alertas de login suspeito\n• Limitação de tentativas\n• Monitoramento de atividades\n\nComo especialista em IAM, recomendo implementar Zero Trust Architecture para máxima proteção.',
+            
+            'MFA recomendations': '🔑 **Recomendações MFA:**\n\n**Métodos mais seguros:**\n1. Hardware keys (YubiKey)\n2. Authenticator apps (Google Authenticator)\n3. Biometria (fingerprint, face ID)\n\n**Evite:**\n• SMS (vulnerável a interceptação)\n• Email recovery fraco\n\n**Best practices:**\n• Backup codes seguros\n• Múltiplos métodos de backup\n• Revisão regular de dispositivos autorizados',
+            
+            'Security best practices': '📋 **Best Practices de Segurança:**\n\n**Pessoal:**\n• Formação contínua em segurança\n• Conscientização sobre phishing\n• Higiene digital adequada\n\n**Profissional:**\n• Princípio do menor privilégio\n• Segregação de duties\n• Auditorias regulares\n\n**Técnico:**\n• Patch management atualizado\n• Criptografia em repouso e trânsito\n• Monitoramento 24/7\n\nCom 6+ anos em IAM, vejo que a segurança é uma jornada contínua!',
+            
+            'Gerador de senha': function() {
+                const password = generateSecurePassword();
+                return '🔐 **Gerador de Senha Segura:**\n\nVou gerar uma senha forte e aleatória para você!\n\n**Sua nova senha segura:**\n`' + password + '`\n\n**Características desta senha:**\n✓ 16 caracteres aleatórios\n✓ Letras maiúsculas e minúsculas\n✓ Números e símbolos especiais\n✓ Alta entropia de segurança\n\n**Dica:** Salve esta senha em um gerenciador de senhas confiável como 1Password, Bitwarden ou LastPass!';
+            }
+        };
+
+        function generateSecurePassword() {
+            const length = 16;
+            const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+            let password = '';
+            
+            for (let i = 0; i < length; i++) {
+                password += charset.charAt(Math.floor(Math.random() * charset.length));
+            }
+            
+            return password;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message === '') return;
+            
+            addUserMessage(message);
+            input.value = '';
+            
+            setTimeout(() => {
+                addBotResponse(message);
+            }, 1000);
+        }
+
+        function sendQuickMessage(topic) {
+            addUserMessage(topic);
+            
+            setTimeout(() => {
+                addBotResponse(topic);
+            }, 1000);
+        }
+
+        function addUserMessage(message) {
+            const chatMessages = document.getElementById('chatMessages');
+            const time = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            
+            const messageHtml = `
+                <div class="message user">
+                    <div class="message-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>${message}</p>
+                        <div class="message-time">${time}</div>
+                    </div>
+                </div>
+            `;
+            
+            chatMessages.innerHTML += messageHtml;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addBotResponse(userMessage) {
+            const chatMessages = document.getElementById('chatMessages');
+            const time = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            
+            let response = securityResponses[userMessage];
+            
+            // Se for uma função, executa para obter a resposta
+            if (typeof response === 'function') {
+                response = response();
+            }
+            
+            if (!response) {
+                response = `🤔 **Analisando sua pergunta sobre:** "${userMessage}"\n\nComo especialista em IAM e cibersegurança, posso ajudar com:\n\n• Segurança de identidade e acesso\n• Boas práticas de autenticação\n• Proteção contra ameaças digitais\n• Recomendações de segurança cloud\n\nSeja mais específico ou tente os botões de ação rápida!`;
+            }
+            
+            const messageHtml = `
+                <div class="message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>${response.replace(/\n/g, '<br>')}</p>
+                        <div class="message-time">${time}</div>
+                    </div>
+                </div>
+            `;
+            
+            chatMessages.innerHTML += messageHtml;
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function handleChatKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Smooth scroll para navegação
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Atualizar active state
+                    document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+
+        // Gerar senha inicial ao carregar a página (removido, pois não temos mais o gerador)
+        window.addEventListener('load', function() {
+            // Chat está pronto para uso
+        });
+    </script>
 </body>
 </html>
